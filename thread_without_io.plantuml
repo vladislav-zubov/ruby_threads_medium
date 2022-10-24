@@ -1,0 +1,49 @@
+@startuml
+concise "Thread 1" as th_1
+concise "Thread 2" as th_2
+concise "Thread 3" as th_3
+
+@th_1
+@0
+@0 <-> @2 : \nGVL acquired
+th_1 is "Run on CPU" #palegreen
+@1
+@2
+th_1 is {hidden}
+@6
+@6 <-> @8 : \nGVL acquired
+th_1 is "Run on CPU" #palegreen
+@7
+@8
+th_1 is {hidden}
+
+@th_2
+@2
+@2 <-> @4 : \nGVL acquired
+th_2 is "Run on CPU" #deepskyblue
+@3
+@4
+th_2 is {hidden}
+@8
+@8 <-> @10 : \nGVL acquired
+th_2 is "Run on CPU" #deepskyblue
+@9
+@10
+th_2 is {hidden}
+
+@th_3
+@4
+@4 <-> @6 : \nGVL acquired
+th_3 is "Run on CPU" #coral
+@5
+@6
+th_3 is {hidden}
+@10
+@10 <-> @12 : \nGVL acquired
+th_3 is "Run on CPU" #coral
+@11
+@12
+th_3 is {hidden}
+
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+concise "Thread 1" as th_1
+concise "Thread 2" as th_2
+concise "Thread 3" as th_3
+
+@th_1
+@0
+th_1 is "Run on" #palegreen
+@1
+@1.5
+th_1 is {hidden}
+note bottom of th_1 : GVL is released
+@2
+@1.5 <-> @8 : Thread is blocked with I/O
+@8
+@8.5
+th_1 is "Run on CPU" #palegreen
+@9
+@10
+@10.5
+th_1 is {hidden}
+
+@th_2
+@1.5
+th_2 is "Run " #deepskyblue
+@2
+@2.5
+th_2 is {hidden}
+note bottom of th_2 : GVL is released
+@3
+@4
+@2.5 <-> @9 : Thread is blocked with I/O
+@10
+@10.5
+th_2 is "Run on CPU" #deepskyblue
+@11
+@12
+@12.5
+th_2 is {hidden}
+
+@th_3
+@2.5
+th_3 is "Run on CPU" #coral
+@3
+@4.5
+th_3 is "Run on CPU" #coral
+@5
+@6
+@6.5
+th_3 is "Run on CPU" #coral
+@7
+@8
+@8.5
+th_3 is {hidden}
+@9
+@10
+@11
+@12
+@12.5
+th_3 is "Run on CPU" #coral
+@13
+@14.5
+th_3 is {hidden}
+
+highlight 2.5 to 8.5 #Gold;line:DimGrey
+
+@enduml
